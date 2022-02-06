@@ -1,6 +1,11 @@
 # IJing
 This project uses the I Jing for six-line divination 
 
+# oneline preview 
+```
+
+https://86ff-114-251-54-102.ngrok.io
+```
 ## 1 安装bee
 
 ```

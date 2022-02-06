@@ -41,6 +41,7 @@ func (c *MainController) Get() {
 	c.Ctx.SetCookie("divinatory", base64.StdEncoding.EncodeToString([]byte(newDivinatory)), duration)
 
 	detailHtml := strings.ReplaceAll(newDivinatoryDetail, "\r", "</br>")
+	detailHtml = strings.ReplaceAll(newDivinatoryDetail, "\r", "</br>")
 	c.Data["Website"] = "IJing"
 	c.Data["Email"] = "hc.harrycheng@gmail.com"
 	c.Data["divinatory"] = newDivinatory
