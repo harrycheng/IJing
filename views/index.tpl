@@ -86,7 +86,7 @@
 
     <div class="card">
       <div class="card-header">{{.divinatory}}</div>
-      <div class="card-body">{{.detail}}</div>
+      <div class="card-body">{{str2html .detail}}</div>
       <div class="card-footer">善易者不卜</div>
     </div>
 
