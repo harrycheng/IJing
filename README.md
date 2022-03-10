@@ -1,11 +1,10 @@
 # IJing
 This project uses the I Jing for six-line divination 
 
-# oneline preview 
-```
+# online preview 
 
-https://86ff-114-251-54-102.ngrok.io
-```
+[https://86ff-114-251-54-102.ngrok.io](https://86ff-114-251-54-102.ngrok.io)
+
 ## 1 安装bee
 
 ```
@@ -22,5 +21,8 @@ bee pack
 
 # for windows
 bee pack -be GOOS=windows 
+
+# linux
 bee pack -be GOOS=linux
 ```
+ 
