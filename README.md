@@ -22,4 +22,5 @@ bee pack
 
 # for windows
 bee pack -be GOOS=windows 
+bee pack -be GOOS=linux
 ```

@@ -1,0 +1,31 @@
+{
+  "name": "ijing",
+  "version": "1.0.0",
+  "description": "This project uses the I Jing for six-line divination",
+  "main": "main.go",
+  "directories": {
+    "test": "tests"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "cz-conventional-changelog": "^3.3.0"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/harrycheng/IJing.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/harrycheng/IJing/issues"
+  },
+  "homepage": "https://github.com/harrycheng/IJing#readme",
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
+  }
+}
