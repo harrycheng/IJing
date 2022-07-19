@@ -85,12 +85,17 @@
     </div>
 
     <div class="card">
-      <div class="card-header">{{.divinatory}}</div>
-      <div class="card-body">{{str2html .detail}}</div>
-      <div class="card-footer">善易者不卜</div>
+      <div class="card-header">
+        {{.divinatory}}
+      </div>
+      <div class="card-body">
+        <h5 class="card-title">{{.divinatoryTime}}</h5>
+        <div class="card-text">{{str2html .detail}}</div>
+      </div>
+       <div class="card-footer">善易者不卜</div>
     </div>
 
-    <div></div>
+
   </header>
   <footer>
     <div class="author">

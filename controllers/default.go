@@ -2,7 +2,9 @@ package controllers
 
 import (
 	ijing "IJing/service"
+	"bytes"
 	"encoding/base64"
+	"github.com/Lofanmi/chinese-calendar-golang/calendar"
 	beego "github.com/beego/beego/v2/server/web"
 	"strings"
 	"time"
@@ -46,7 +48,21 @@ func (c *MainController) Get() {
 	c.Data["Email"] = "hc.harrycheng@gmail.com"
 	c.Data["divinatory"] = newDivinatory
 	c.Data["detail"] = detailHtml
+	c.Data["divinatoryTime"] = GetLunarStr()
 	c.TplName = "index.tpl"
+}
+
+func GetLunarStr() string {
+	t := time.Now()
+	c := calendar.BySolar(int64(t.Year()), int64(t.Month()), int64(t.Day()), int64(t.Hour()), int64(t.Minute()), int64(t.Second()))
+	var buffer bytes.Buffer
+	buffer.WriteString("农历：" + c.Ganzhi.YearGanzhiAlias() + "年")
+	buffer.WriteString(c.Ganzhi.MonthGanzhiAlias() + "月")
+	buffer.WriteString(c.Ganzhi.DayGanzhiAlias() + "日")
+
+	buffer.WriteString("公历：" + t.Format("2006-01-02 03:04:05"))
+
+	return buffer.String()
 }
 
 func (c *MainController) Post() {
