@@ -1,0 +1,25 @@
+{
+  "name": "FateFlow",
+  "version": "1.0.0",
+  "description": "This project uses the I Jing for six-line divination",
+  "main": "nuxt.config.ts",
+  "scripts": {
+    "build": "nuxt build",
+    "dev": "nuxt dev",
+    "generate": "nuxt generate",
+    "preview": "nuxt preview",
+    "postinstall": "nuxt prepare"
+  },
+  "dependencies": {
+    "axios": "^1.10.0",
+    "chinese-lunar-calendar": "^1.0.1",
+    "nuxt": "^3.17.5",
+    "vue-i18n": "^9.1.0"
+  },
+  "devDependencies": {
+    "@types/node": "^18.0.0",
+    "sass-embedded": "^1.89.2",
+    "ts-node": "^10.9.1",
+    "typescript": "~5.3.3"
+  }
+}
