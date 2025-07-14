@@ -2,17 +2,21 @@ import { arabicNumTrans } from '@/utils/transfer';
 import { readFileSync } from 'fs';
 import { join } from 'path';
 
-export const get64Symbol = () => {
+export const get64Symbol = async () => {
   try {
-    const data = readFileSync(join(process.cwd(), 'public', '64Symbols.txt'));
-    return data.toString().split('\n');
+    const storage = useStorage('assets:server');
+    const data64 = await storage.getItem('64Symbols.txt');
+    if (typeof data64 === 'string') {
+      return data64.split('\n');
+    }
+    return [];
   } catch (error) {
     console.error('文件读取失败！');
     return [];
   }
 };
 
-export const IjDivinatory = (): [string, string] => {
+export const IjDivinatory = async (): Promise<[string, string]> => {
   const HALFDIVINATORY = ['地', '雷', '水', '泽', '山', '火', '风', '天'];
 
   const up = IjHalfDivinatory();
@@ -21,51 +25,51 @@ export const IjDivinatory = (): [string, string] => {
   const upStr = HALFDIVINATORY[up];
   const downStr = HALFDIVINATORY[down];
 
-  const symbols64 = get64Symbol();
+  const symbols64 = await get64Symbol();
   for (const s of symbols64) {
     const i = s.indexOf(upStr + downStr);
     if (i !== -1) {
       const nameRune = Array.from(s);
       const divinatory = nameRune.slice(5).join('');
-      
+
       let indexStr = nameRune.slice(0, 2).join('');
       const indexNum = parseInt(indexStr, 10);
       const indexCnStr = arabicNumTrans(indexNum);
-      
+
       const nextNum = indexNum + 1;
       const nextCnStr = arabicNumTrans(nextNum);
-      
-      const ijStr = readFileSync(join(process.cwd(), 'public', 'IJing.txt')).toString();
-      
+
+      const ijStr = readFileSync(join(process.cwd(), 'data', 'IJing.txt')).toString();
+
       const sIndex = ijStr.indexOf('第' + indexCnStr + '卦');
       const eIndex = ijStr.indexOf('第' + nextCnStr + '卦');
-      
+
       const detail = ijStr.slice(sIndex, eIndex === -1 ? undefined : eIndex);
-      
+
       return [divinatory, detail];
     }
   }
-  
+
   return ['', ''];
 };
 
-export const getDivinatoryDetailByName = (name: string): string => {
-  const symbols64 = get64Symbol();
-  const ijStr = readFileSync(join(process.cwd(), 'public', 'IJing.txt')).toString();
-
+export const getDivinatoryDetailByName = async (name: string): Promise<string> => {
+  const symbols64 = await get64Symbol();
+  const ijStr = readFileSync(join(process.cwd(), 'data', 'IJing.txt')).toString();
+  console.log(symbols64);
   for (const s of symbols64) {
     if (s.includes(name)) {
       const nameRune = Array.from(s);
       const indexStr = nameRune.slice(0, 2).join('');
       const indexNum = parseInt(indexStr, 10);
       const indexCnStr = arabicNumTrans(indexNum);
-      
+
       const nextNum = indexNum + 1;
       const nextCnStr = arabicNumTrans(nextNum);
-      
+
       const sIndex = ijStr.indexOf('第' + indexCnStr + '卦');
       const eIndex = ijStr.indexOf('第' + nextCnStr + '卦');
-      
+
       const detail = ijStr.slice(sIndex, eIndex === -1 ? undefined : eIndex);
       return detail;
     }

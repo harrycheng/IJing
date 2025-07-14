@@ -1,4 +1,4 @@
-import { getDivinatory } from '@/services/divinatory';
+import { getDivinatory } from '~/server/utils/services/divinatory';
 
 export default defineEventHandler(async (event) => {
     const today = new Date().toISOString().split('T')[0];
