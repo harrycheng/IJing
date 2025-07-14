@@ -1,6 +1,4 @@
 import { arabicNumTrans } from '@/utils/transfer';
-import { readFileSync } from 'fs';
-import { join } from 'path';
 
 export const get64Symbol = async () => {
   try {
@@ -26,6 +24,9 @@ export const IjDivinatory = async (): Promise<[string, string]> => {
   const downStr = HALFDIVINATORY[down];
 
   const symbols64 = await get64Symbol();
+  const storage = useStorage('assets:server');
+  const ijStr = (await storage.getItem('IJing.txt')) as string;
+
   for (const s of symbols64) {
     const i = s.indexOf(upStr + downStr);
     if (i !== -1) {
@@ -38,8 +39,6 @@ export const IjDivinatory = async (): Promise<[string, string]> => {
 
       const nextNum = indexNum + 1;
       const nextCnStr = arabicNumTrans(nextNum);
-
-      const ijStr = readFileSync(join(process.cwd(), 'data', 'IJing.txt')).toString();
 
       const sIndex = ijStr.indexOf('第' + indexCnStr + '卦');
       const eIndex = ijStr.indexOf('第' + nextCnStr + '卦');
@@ -55,8 +54,9 @@ export const IjDivinatory = async (): Promise<[string, string]> => {
 
 export const getDivinatoryDetailByName = async (name: string): Promise<string> => {
   const symbols64 = await get64Symbol();
-  const ijStr = readFileSync(join(process.cwd(), 'data', 'IJing.txt')).toString();
-  console.log(symbols64);
+  const storage = useStorage('assets:server');
+  const ijStr = (await storage.getItem('IJing.txt')) as string;
+
   for (const s of symbols64) {
     if (s.includes(name)) {
       const nameRune = Array.from(s);
